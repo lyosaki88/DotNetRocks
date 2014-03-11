@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.Net Rocks</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body background="@Url.Content("~/Resources/Images/background.jpg")">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="@Url.Content("~/Resources/Images/xiyangwushi.jpg")" style="width:50px;height:50px;" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("首页", "Index", "Home")</li>
+                    <li><a href="WebApp/flappybird">扑腾小鸟</a></li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="body-content">
+        @RenderBody()
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom text-center navbar-inverse" role="navigation">
+        <div style="color:gray;">
+            &copy; 2014 - @DateTime.Now.Year <a href="http://www.lyosaki88.com">.Net Rocks</a>
+            <!-- 站长统计 -->
+            <span style="margin-left:100px;">
+                <script src="http://s5.cnzz.com/z_stat.php?id=1000309813&web_id=1000309813" language="JavaScript"></script>
+                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1000309813'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/z_stat.php%3Fid%3D1000309813%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+            </span>
+        </div>
+    </nav>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
