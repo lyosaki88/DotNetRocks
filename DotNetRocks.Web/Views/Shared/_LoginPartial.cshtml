@@ -3,20 +3,26 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("你好 " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "管理" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li onmouseover="$(this).addClass('active');" onmouseout="$(this).removeClass('active');">
+                @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "账号管理" })
+            </li>
+            <li onmouseover="$(this).addClass('active');" onmouseout="$(this).removeClass('active');">
+                <a href="javascript:document.getElementById('logoutForm').submit()">退出登陆</a>
+            </li>
+        </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li onmouseover="$(this).addClass('active');" onmouseout="$(this).removeClass('active');">
+            @Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+        </li>
+        <li onmouseover="$(this).addClass('active');" onmouseout="$(this).removeClass('active');">
+            @Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        </li>
     </ul>
 }

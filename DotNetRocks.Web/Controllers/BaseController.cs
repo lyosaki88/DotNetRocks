@@ -1,11 +1,15 @@
-﻿using DotNetRocks.Models;
+﻿using DotNetRocks.Web.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Owin.Security;
+using DotNetRocks.Web.Configurations;
+using System.Configuration;
 
 namespace DotNetRocks.Web.Controllers
 {
@@ -14,72 +18,64 @@ namespace DotNetRocks.Web.Controllers
     /// </summary>
     public class BaseController : Controller
     {
-        /// <summary>
-        /// 当前上下文中的AppDbContext实例
-        /// </summary>
-        protected AppDbContext _dbContext { get; private set; }
-        /// <summary>
-        /// 当前上下文中的UserManager实例
-        /// </summary>
-        protected UserManager<ApplicationUser> _userManager { get; private set; }
-
         public BaseController()
+            : base()
         {
-            _dbContext = new AppDbContext();
-            _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new AppDbContext()));
+
         }
-        /// <summary>
-        /// 当前登录用户的ID
-        /// </summary>
-        public virtual string CurrentUserId
+
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
         {
             get
             {
-                if (!this.User.Identity.IsAuthenticated)
-                    throw new ApplicationException("当前未有合法登陆的用户");
-                return this.User.Identity.GetUserId();
+                if (_userManager == null)
+                {
+                    _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                }
+                return _userManager;
             }
         }
-
-        /// <summary>
-        /// 当前登录用户的用户名
-        /// </summary>
-        public virtual string CurrentUserName
+        private IAuthenticationManager _authenticationManager;
+        protected IAuthenticationManager AuthenticationManager
         {
             get
             {
-                if (!this.User.Identity.IsAuthenticated)
-                    throw new ApplicationException("当前未有合法登陆的用户");
-                return this.User.Identity.GetUserName();
+                if (_authenticationManager == null)
+                {
+                    _authenticationManager = HttpContext.GetOwinContext().Authentication;
+                }
+                return _authenticationManager;
             }
         }
-
-        /// <summary>
-        /// 当前登录用户的完整信息
-        /// </summary>
-        public virtual ApplicationUser CurrentUserProfile
+        private WebSiteConfig _webSiteConfig;
+        public WebSiteConfig WebSiteConfig
         {
             get
             {
-                if (string.IsNullOrEmpty(this.CurrentUserId))
-                    throw new ApplicationException("当前未有合法登陆的用户");
-                return _userManager.FindById(this.CurrentUserId);
+                if (_webSiteConfig == null)
+                {
+                    _webSiteConfig = (WebSiteConfig)ConfigurationManager.GetSection("application/website");
+                }
+                return _webSiteConfig;
             }
         }
 
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            ViewBag.WebSiteName = WebSiteConfig.Name;
+            ViewBag.BuildVersion = WebSiteConfig.Version;
+            base.OnActionExecuting(filterContext);
+        }
         protected override void Dispose(bool disposing)
         {
-            if (disposing && this._dbContext != null)
-            {
-                _dbContext.Dispose();
-                _dbContext = null;
-            }
-            if (disposing && this._userManager != null)
+            if (disposing && _userManager != null)
             {
                 _userManager.Dispose();
                 _userManager = null;
             }
+
             base.Dispose(disposing);
         }
-	}
+    }
 }

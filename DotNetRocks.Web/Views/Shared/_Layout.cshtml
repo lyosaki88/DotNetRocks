@@ -4,12 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>.Net Rocks</title>
+    <title>@ViewBag.Title - @ViewBag.WebSiteName</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
 </head>
-<body background="@Url.Content("~/Resources/Images/background.jpg")">
+<body style="font-family: 'Microsoft YaHei UI'; color: gray; background: url(@Url.Content("~/Resources/Images/background.jpg"));">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -26,6 +24,11 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("首页", "Index", "Home")</li>
                     <li><a href="WebApp/flappybird">扑腾小鸟</a></li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("权限管理", "Index", "RolesAdmin")</li>
+                        <li>@Html.ActionLink("账号管理", "Index", "UsersAdmin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -36,7 +39,7 @@
     </div>
     <nav class="navbar navbar-default navbar-fixed-bottom text-center navbar-inverse" role="navigation">
         <div style="color:gray;">
-            &copy; 2014 - @DateTime.Now.Year <a href="http://www.lyosaki88.com">.Net Rocks</a>
+            &copy; 2014 - @DateTime.Now.Year <a href="http://www.lyosaki88.com">@ViewBag.WebSiteName - @ViewBag.BuildVersion</a>
             <!-- 站长统计 -->
             <span style="margin-left:100px;">
                 <script src="http://s5.cnzz.com/z_stat.php?id=1000309813&web_id=1000309813" language="JavaScript"></script>

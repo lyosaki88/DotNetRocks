@@ -1,0 +1,75 @@
+@model DotNetRocks.Web.ViewModels.IndexViewModel
+@{
+    ViewBag.Title = "账号管理";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div class="row">
+    <div class="col-md-3">
+        <div>
+            @if (Model.HasPassword)
+            {
+                <a href="@Url.Action("ChangePassword")" class="btn btn-default btn-sm">修改密码</a>
+            }
+            else
+            {
+                <a href="@Url.Action("SetPassword")" class="btn btn-default">设置密码</a>
+            }
+        </div>
+        <div style="margin-top:5px;">
+            <table class="table table-responsive">
+                <tr>
+                    <th style="text-align:right;">手机号码：</th>
+                    <th>@(Model.PhoneNumber ?? "未绑定")</th>
+                    <th>
+                        @if (Model.PhoneNumber != null)
+                        {
+                            <a href="@Url.Action("AddPhoneNumber")" class="btn btn-default btn-xs">变更手机</a>
+                            @: &nbsp;|&nbsp;
+                            <a href="@Url.Action("RemovePhoneNumber")" class="btn btn-default btn-xs">解除绑定</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("AddPhoneNumber")" class="btn btn-default btn-xs">绑定手机</a>
+                        }
+                    </th>
+                </tr>
+                <tr>
+                    <th style="text-align:right;">授权登陆：</th>
+                    <th>@Model.Logins.Count</th>
+                    <th><a href="@Url.Action("ManageLogins")" class="btn btn-default btn-xs">管理</a></th>
+                </tr>
+                <tr>
+                    <th style="text-align:right;">登陆认证：</th>
+                    <th>@(Model.TwoFactor)</th>
+                    <th>
+                        @if (Model.TwoFactor)
+                        {
+                            <a href="@Url.Action("DisableTFA")" class="btn btn-default btn-xs">关闭</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("EnableTFA")" class="btn btn-default btn-xs">开启</a>
+                        }
+                    </th>
+                </tr>
+                <tr>
+                    <th style="text-align:right;">记住登陆认证：</th>
+                    <th>@Model.BrowserRemembered</th>
+                    <th>
+                        @if (Model.BrowserRemembered)
+                        {
+                            <a href="@Url.Action("ForgetBrowser")" class="btn btn-default btn-xs">否</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("RememberBrowser")" class="btn btn-default btn-xs">是</a>
+                        }
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

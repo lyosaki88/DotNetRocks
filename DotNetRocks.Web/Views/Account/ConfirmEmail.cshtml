@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "邮箱验证";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div>
+    <p>
+        感谢验证您的邮箱！ 请点击这里登陆 @Html.ActionLink("点我登陆", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+    </p>
+</div>
