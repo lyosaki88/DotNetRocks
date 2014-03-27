@@ -147,7 +147,7 @@ namespace DotNetRocks.Web.Helpers
             {
                 return SignInStatus.LockedOut;
             }
-            if (!user.EmailConfirmed)
+            if (!await UserManager.IsEmailConfirmedAsync(user.Id))
             {
                 return SignInStatus.EmailInvalid;
             }

@@ -206,6 +206,7 @@
     <Content Include="Content\messenger.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Resources\Images\background.jpg" />
@@ -282,9 +283,9 @@
     <Content Include="WebApp\flappybird\src\resource.js" />
     <Content Include="WebApp\flappybird\src\view\play_scene.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\lyosaki88.com.pubxml" />
+    <None Include="Properties\PublishProfiles\发布到桌面.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
