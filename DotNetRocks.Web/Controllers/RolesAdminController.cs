@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
-using DotNetRocks.Web.Models;
+using DotNetRocks.Models;
 using DotNetRocks.Web.ViewModels;
 
 namespace DotNetRocks.Web.Controllers

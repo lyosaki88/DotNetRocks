@@ -10,7 +10,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
-using DotNetRocks.Web.Models;
+using DotNetRocks.Models;
+using DotNetRocks.Web.Configurations;
+using System.Configuration;
 
 namespace DotNetRocks.Web.Helpers
 {
@@ -139,6 +141,7 @@ namespace DotNetRocks.Web.Helpers
         public async Task<SignInStatus> PasswordSignIn(string userName, string password, bool isPersistent, bool shouldLockout)
         {
             var user = await UserManager.FindByNameAsync(userName);
+            var mailConfig = (MailConfig)ConfigurationManager.GetSection("application/mail");
             if (user == null)
             {
                 return SignInStatus.Failure;
@@ -147,9 +150,12 @@ namespace DotNetRocks.Web.Helpers
             {
                 return SignInStatus.LockedOut;
             }
-            if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+            if (mailConfig.RequireValid)
             {
-                return SignInStatus.EmailInvalid;
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    return SignInStatus.EmailInvalid;
+                }
             }
             if (await UserManager.CheckPasswordAsync(user, password))
             {

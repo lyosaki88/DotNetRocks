@@ -1,4 +1,4 @@
-﻿using DotNetRocks.Web.Models;
+﻿using DotNetRocks.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;

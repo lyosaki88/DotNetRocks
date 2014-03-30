@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DotNetRocks.Web.ViewModels;
-using DotNetRocks.Web.Models;
+using DotNetRocks.Models;
 using DotNetRocks.Web.Helpers;
 using DotNetRocks.Web.Resources.Texts;
+using System.Configuration;
+using DotNetRocks.Web.Configurations;
 namespace DotNetRocks.Web.Controllers
 {
     [Authorize]
@@ -135,9 +137,15 @@ namespace DotNetRocks.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var mailConfig = (MailConfig)ConfigurationManager.GetSection("application/mail");
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // 若不需要激活邮箱，直接跳转到首页
+                    if (!mailConfig.RequireValid)
+                    {
+                        return View("Login");
+                    }
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, AccountResources.ValidEmail_Subject, AccountResources.ValidEmail_Body.Replace("{0}", callbackUrl));

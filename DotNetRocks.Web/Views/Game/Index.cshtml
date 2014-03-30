@@ -1,0 +1,30 @@
+﻿@model DotNetRocks.Models.GameModels.Character
+@{
+    Layout = "~/Views/Shared/_LayoutGame.cshtml";
+    ViewBag.Title = "人物信息";
+}
+
+<h2>人物信息</h2>
+
+<table class="table table-striped table-condensed table-responsive">
+    <thead>
+        <tr>
+            <th>侠客姓名</th>
+            <th>当前等级</th>
+            <th>当前经验</th>
+            <th>下级经验</th>
+            <th>最大血量</th>
+            <th>当前血量</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>@Model.Name</th>
+            <th>@Model.Level</th>
+            <th>@Model.CurrentExp</th>
+            <th>@Model.NextExp</th>
+            <th>@Model.MaxHP</th>
+            <th>@Model.CurrentHP</th>
+        </tr>
+    </tbody>
+</table>

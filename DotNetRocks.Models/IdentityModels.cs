@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using DotNetRocks.Models.GameModels;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace DotNetRocks.Web.Models
+namespace DotNetRocks.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
@@ -12,7 +14,7 @@ namespace DotNetRocks.Web.Models
         public ApplicationUser()
             : base()
         {
-
+            this.CharacterCapacity = 2;
         }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -21,34 +23,14 @@ namespace DotNetRocks.Web.Models
             // Add custom user claims here
             return userIdentity;
         }
-
         /// <summary>
-        /// 昵称
+        /// 最大角色数量
         /// </summary>
-        public string NickName { get; set; }
+        public int CharacterCapacity { get; set; }
         /// <summary>
-        /// 性别, True: 男 .False: 女
+        /// 全部角色集合
         /// </summary>
-        public General General { get; set; }
-        /// <summary>
-        /// QQ号
-        /// </summary>
-        public string QQ { get; set; }
+        public virtual List<Character> Characters { get; set; }
 
     }
-    /// <summary>
-    /// 性别
-    /// </summary>
-    public enum General
-    {
-        /// <summary>
-        /// 男
-        /// </summary>
-        Male,
-        /// <summary>
-        /// 女
-        /// </summary>
-        Female
-    }
-
 }

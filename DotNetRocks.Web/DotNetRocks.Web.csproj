@@ -175,6 +175,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -189,17 +190,16 @@
       <DependentUpon>AccountResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\ApplicationDbContext.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\Game\CharacterViewModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\messenger-theme-future.css" />
@@ -237,6 +237,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Account\VerifyCode.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Game\CreateCharacter.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Manage\ChangePassword.cshtml">
@@ -284,6 +287,8 @@
     <Content Include="WebApp\flappybird\src\view\play_scene.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\lyosaki88.com.pubxml" />
     <None Include="Properties\PublishProfiles\发布到桌面.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -343,6 +348,8 @@
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -355,6 +362,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AccountResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetRocks.Models\DotNetRocks.Models.csproj">
+      <Project>{806ecde0-f8f6-45ef-8158-5c2619531daa}</Project>
+      <Name>DotNetRocks.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

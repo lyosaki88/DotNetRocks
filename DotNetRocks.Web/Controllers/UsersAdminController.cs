@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DotNetRocks.Web.ViewModels;
-using DotNetRocks.Web.Models;
+using DotNetRocks.Models;
 
 namespace DotNetRocks.Web.Controllers
 {

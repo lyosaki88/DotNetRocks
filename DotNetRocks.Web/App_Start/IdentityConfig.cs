@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
-using DotNetRocks.Web.Models;
+using DotNetRocks.Models;
 using DotNetRocks.Web.Configurations;
 using System.Net.Mail;
 using System.Threading;

@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <title>理工江湖 CDUT Adventure</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - @ViewBag.WebSiteName</title>
     @Styles.Render("~/Content/css")
 </head>
 <body style="font-family: 'Microsoft YaHei UI'; color: gray; background: url(@Url.Content("~/Resources/Images/background.jpg"));">
@@ -29,10 +29,6 @@
                         <li>@Html.ActionLink("权限管理", "Index", "RolesAdmin")</li>
                         <li>@Html.ActionLink("账号管理", "Index", "UsersAdmin")</li>
                     }
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("杀入江湖", "Index", "Game")</li>
-                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -44,18 +40,11 @@
     <nav class="navbar navbar-default navbar-fixed-bottom text-center navbar-inverse" role="navigation">
         <div style="color:gray;">
             &copy; 2014 - @DateTime.Now.Year <a href="http://www.lyosaki88.com">@ViewBag.WebSiteName - @ViewBag.BuildVersion</a>
-            <!-- 站长统计 -->
-            <span style="margin-left:100px;">
-                <script src="http://s5.cnzz.com/z_stat.php?id=1000309813&web_id=1000309813" language="JavaScript"></script>
-                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1000309813'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/z_stat.php%3Fid%3D1000309813%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
-            </span>
         </div>
     </nav>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

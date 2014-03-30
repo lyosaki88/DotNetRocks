@@ -1,4 +1,4 @@
-﻿using DotNetRocks.Web.Models;
+﻿using DotNetRocks.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Microsoft.Owin.Security;
 using DotNetRocks.Web.Configurations;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace DotNetRocks.Web.Controllers
 {
@@ -21,11 +22,22 @@ namespace DotNetRocks.Web.Controllers
         public BaseController()
             : base()
         {
-
+        }
+        private ApplicationDbContext _dbContext;
+        protected ApplicationDbContext DbContext
+        {
+            get
+            {
+                if (_dbContext == null)
+                {
+                    _dbContext = ApplicationDbContext.Create();
+                }
+                return _dbContext;
+            }
         }
 
         private ApplicationUserManager _userManager;
-        public ApplicationUserManager UserManager
+        protected ApplicationUserManager UserManager
         {
             get
             {
@@ -49,7 +61,7 @@ namespace DotNetRocks.Web.Controllers
             }
         }
         private WebSiteConfig _webSiteConfig;
-        public WebSiteConfig WebSiteConfig
+        protected WebSiteConfig WebSiteConfig
         {
             get
             {
@@ -61,14 +73,50 @@ namespace DotNetRocks.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// 当前登录用户的ID
+        /// </summary>
+        protected virtual string _currentUserId
+        {
+            get
+            {
+                if (this.User.Identity.IsAuthenticated)
+                {
+                    return this.User.Identity.GetUserId();
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 当前登录用户的用户名
+        /// </summary>
+        protected virtual string _currentUserName
+        {
+            get
+            {
+                if (this.User.Identity.IsAuthenticated)
+                {
+                    return this.User.Identity.GetUserName();
+                }
+                return null;
+            }
+        }
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             ViewBag.WebSiteName = WebSiteConfig.Name;
             ViewBag.BuildVersion = WebSiteConfig.Version;
+
             base.OnActionExecuting(filterContext);
         }
         protected override void Dispose(bool disposing)
         {
+            if (disposing && _dbContext != null)
+            {
+                _dbContext.Dispose();
+                _dbContext = null;
+            }
             if (disposing && _userManager != null)
             {
                 _userManager.Dispose();
