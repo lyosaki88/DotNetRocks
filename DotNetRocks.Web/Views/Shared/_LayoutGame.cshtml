@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Content/css")
 </head>
-<body style="font-family: 'Microsoft YaHei UI'; color: gray; background: url(@Url.Content("~/Resources/Images/background.jpg"));">
+<body style="font-family: 'Microsoft YaHei UI'; color: #993300; background: url(@Url.Content("~/Resources/Images/background4.jpg"));background-repeat:space;">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -22,13 +22,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("首页", "Index", "Home")</li>
-                    <li><a href="WebApp/flappybird">扑腾小鸟</a></li>
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("权限管理", "Index", "RolesAdmin")</li>
-                        <li>@Html.ActionLink("账号管理", "Index", "UsersAdmin")</li>
-                    }
+                    <li>@Html.ActionLink("个人信息", "Index", "Character")</li>
+                    <li>@Html.ActionLink("战斗", "Index", "Battle")</li>
+                    <li>@Html.ActionLink("职业", "Index", "Battle")</li>
+                    <li>@Html.ActionLink("技能", "Index", "Battle")</li>
+                    <li>@Html.ActionLink("装备", "Index", "Battle")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -7,10 +7,10 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li onmouseover="$(this).addClass('active');" onmouseout="$(this).removeClass('active');">
-                @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "账号管理" })
+                @Html.ActionLink("账号管理", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "账号管理" })
             </li>
             <li onmouseover="$(this).addClass('active');" onmouseout="$(this).removeClass('active');">
-                <a href="javascript:document.getElementById('logoutForm').submit()">退出登陆</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()">注销</a>
             </li>
         </ul>
     }

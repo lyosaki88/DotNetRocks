@@ -210,6 +210,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Resources\Images\background.jpg" />
+    <Content Include="Resources\Images\background3.jpg" />
+    <Content Include="Resources\Images\background2.jpg" />
     <Content Include="Resources\Images\JHIndex.jpg" />
     <Content Include="Resources\Images\xiyangwushi.jpg" />
     <Content Include="Scripts\bootstrap.js" />
