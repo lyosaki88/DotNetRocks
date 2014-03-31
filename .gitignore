@@ -155,3 +155,7 @@ $RECYCLE.BIN/
 
 # elmah errors log files
 Elmah.Errors/
+/DotNetRocks.Web/bin
+
+/DotNetRocks.Web/App_Data/*.mdf
+/DotNetRocks.Web/App_Data/*.ldf
